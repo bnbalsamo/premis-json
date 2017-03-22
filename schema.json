@@ -630,7 +630,10 @@
                 "termOfRestriction": {"$ref": "#/definitions/termOfRestriction"},
                 "rightsGrantedNote": {"$ref": "#/definitions/not_empty_string_array"}
             },
-            "additionalProperties": false
+            "additionalProperties": false,
+            "required": [
+                "act"
+            ]
         },
         "termOfGrant": {
             "type": "object",
