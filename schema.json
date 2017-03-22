@@ -22,6 +22,12 @@
             "additionalItems": false,
             "minItems": 1
         },
+        "extensible_node": {
+            "type": "array",
+            "items": {"type": "object"},
+            "additionalItems": false,
+            "minItems": 1
+        },
         "object": {
             "type": "object",
             "properties": {
@@ -36,7 +42,7 @@
                 "environmentFunction": {"$ref": "#/definitions/environmentFunction_array"},
                 "environmentDesignation": {"$ref": "#/definitions/environmentDesignation_array"},
                 "environmentRegistry": {"$ref": "#/definitions/environmentRegistry_array"},
-                "environmentExtension": {},
+                "environmentExtension": {"$ref": "#/definitions/extensible_node"},
                 "relationship": {"$ref": "#/definitions/relationship_array"},
                 "linkingEventIdentifier": {"$ref": "#/definitions/linkingEventIdentifier_array"},
                 "linkingRightsStatementIdentifier": {"$ref": "#/definitions/linkingRightsStatementIdentifier_array"}
@@ -79,7 +85,7 @@
             "properties": {
                 "significantPropertiesType": {"$ref": "#/definitions/not_empty_string"},
                 "significantPropertiesValue": {"$ref": "#/definitions/not_empty_string"},
-                "significantPropertiesExtension": {}
+                "significantPropertiesExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
@@ -92,7 +98,7 @@
                 "format": {"$ref": "#/definitions/format_array"},
                 "creatingApplication": {"$ref": "#/definitions/creatingApplication_array"},
                 "inhibitors": {"$ref": "#/definitions/inhibitors_array"},
-                "objectCharacteristicsExtension": {}
+                "objectCharacteristicsExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false,
             "required": [
@@ -151,7 +157,7 @@
                 "creatingApplicationName": {"$ref": "#/definitions/not_empty_string"},
                 "creatingApplicationVersion": {"$ref": "#/definitions/not_empty_string"},
                 "dateCreatedByApplication": {"$ref": "#definitions/not_empty_string"},
-                "creatingApplicationExtension": {}
+                "creatingApplicationExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
@@ -191,7 +197,7 @@
             "type": "object",
             "properties": {
                 "signature": {"$ref": "#/definitions/signature_array"},
-                "signatureInformationExtension": {}
+                "signatureInformationExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
@@ -204,7 +210,7 @@
                 "signatureValue": {"$ref": "#/definitions/not_empty_string"},
                 "signatureValidationRules": {"$ref": "#definitions/not_empty_string"},
                 "signatureProperties": {"$ref": "#/definitions/not_empty_string_array"},
-                "keyInformation": {}
+                "keyInformation": {"type": "object"}
             },
             "additionalProperties": false,
             "required": [
@@ -233,7 +239,7 @@
                 "environmentVersion": {"$ref": "#/definitions/not_empty_string"},
                 "environmentOrigin": {"$ref": "#/definitions/not_empty_string"},
                 "environmentDesignationNote": {"$ref": "#/definitions/not_empty_string_array"},
-                "environmentDesignationExtension": {}
+                "environmentDesignationExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false,
             "required": [
@@ -354,7 +360,7 @@
             "type": "object",
             "properties": {
                 "eventDetail": {"$ref": "#/definitions/not_empty_string"},
-                "eventDetailExtension": {}
+                "eventDetailExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
@@ -370,7 +376,7 @@
             "type": "object",
             "properties": {
                 "eventOutcomeDetailNote": {"$ref": "#/definitions/not_empty_string"},
-                "eventOutcomeDetailExtension": {}
+                "eventOutcomeDetailExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
@@ -408,7 +414,7 @@
                 "agentType": {"$ref": "#/definitions/not_empty_string"},
                 "agentVersion": {"$ref": "#/definitions/not_empty_string"},
                 "agentNote": {"$ref": "#/definitions/not_empty_string_array"},
-                "agentExtension": {},
+                "agentExtension": {"$ref": "#/definitions/extensible_node"},
                 "linkingEventIdentifier": {"$ref": "#/definitions/linkingEventIdentifier_array"},
                 "linkingRightsStatementIdentifier": {"$ref": "#/definitions/linkingRightsStatementIdentifier_array"},
                 "linkingEnvironmentIdentifier": {"$ref": "#/definitions/linkingEnvironmentIdentifier_array"}
@@ -447,7 +453,7 @@
             "type": "object",
             "properties": {
                 "rightsStatement": {"$ref": "#/definitions/rightsStatement_array"},
-                "rightsExtension": {}
+                "rightsExtension": {"$ref": "#/definitions/extensible_node"}
             },
             "additionalProperties": false
         },
