@@ -91,7 +91,7 @@
                 "size": {"$ref": "#/definitions/not_empty_string"},
                 "format": {"$ref": "#/definitions/format_array"},
                 "creatingApplication": {"$ref": "#/definitions/creatingApplication_array"},
-                "inhibitors": {"$ref": "#/inhibitors_array"},
+                "inhibitors": {"$ref": "#/definitions/inhibitors_array"},
                 "objectCharacteristicsExtension": {}
             },
             "additionalProperties": false,
@@ -204,7 +204,7 @@
                 "signatureValue": {"$ref": "#/definitions/not_empty_string"},
                 "signatureValidationRules": {"$ref": "#definitions/not_empty_string"},
                 "signatureProperties": {"$ref": "#/definitions/not_empty_string_array"},
-                "keyInformation": {"$ref": "#/definitions/not_empty_string"}
+                "keyInformation": {}
             },
             "additionalProperties": false,
             "required": [
@@ -259,7 +259,7 @@
                 "relationshipType": {"$ref": "#/definitions/not_empty_string"},
                 "relationshipSubType": {"$ref": "#/definitions/not_empty_string"},
                 "relatedObjectIdentifier": {"$ref": "#/definitions/relatedObjectIdentifier_array"},
-                "relatedEventIdentifier": {"$ref": "#/definitions/relatedEventIdentifier/array"},
+                "relatedEventIdentifier": {"$ref": "#/definitions/relatedEventIdentifier_array"},
                 "relatedEnvironmentPurpose": {"$ref": "#/definitions/not_empty_string_array"},
                 "relatedEnvironmentCharacteristic": {"$ref": "#/definitions/not_empty_string"}
             },
@@ -410,6 +410,7 @@
                 "agentNote": {"$ref": "#/definitions/not_empty_string_array"},
                 "agentExtension": {},
                 "linkingEventIdentifier": {"$ref": "#/definitions/linkingEventIdentifier_array"},
+                "linkingRightsStatementIdentifier": {"$ref": "#/definitions/linkingRightsStatementIdentifier_array"},
                 "linkingEnvironmentIdentifier": {"$ref": "#/definitions/linkingEnvironmentIdentifier_array"}
             },
             "additionalProperties": false,
@@ -493,7 +494,7 @@
             },
             "additionalProperties": false,
             "required": [
-                "copyrightStatys",
+                "copyrightStatus",
                 "copyrightJurisdiction"
             ]
         },
@@ -510,7 +511,7 @@
                 "copyrightDocumentationIdentifierValue"
             ]
         },
-        "copyrightApplicationDates": {
+        "copyrightApplicableDates": {
             "type": "object",
             "properties": {
                 "startDate": {"$ref": "#/definitions/not_empty_string"},
@@ -556,12 +557,12 @@
                 "statuteCitation": {"$ref": "#/definitions/not_empty_string"},
                 "statuteInformationDeterminationDate": {"$ref": "#/definitions/not_empty_string"},
                 "statuteNote": {"$ref": "#/definitions/not_empty_string_array"},
-                "statuteDocumentationIdentifier": {"$ref": "statuteDocumentationIdentifier_array"},
-                "statuteApplicableDates": {"$ref": "statuteApplicableDates"}
+                "statuteDocumentationIdentifier": {"$ref": "#/definitions/statuteDocumentationIdentifier_array"},
+                "statuteApplicableDates": {"$ref": "#/definitions/statuteApplicableDates"}
             },
             "additionalProperties": false,
             "required": [
-                "statuteJuisdiction",
+                "statuteJurisdiction",
                 "statuteCitation"
             ]
         },
@@ -791,6 +792,12 @@
             "additionalItems": false,
             "minItems": 1
         },
+        "eventOutcomeDetail_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/eventOutcomeDetail"},
+            "additionalItems": false,
+            "minItems": 1
+        },
         "linkingAgentIdentifier_array": {
             "type": "array",
             "items": {"$ref": "#/definitions/linkingAgentIdentifier"},
@@ -812,6 +819,12 @@
         "agentIdentifier_array": {
             "type": "array",
             "items": {"$ref": "#/definitions/agentIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingRightsStatementIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingRightsStatementIdentifier"},
             "additionalItems": false,
             "minItems": 1
         },
