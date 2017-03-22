@@ -1,0 +1,873 @@
+{
+    "id": "premis",
+    "title": "PREMISv3",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "schema for PREMISv3 represented as JSON",
+    "type": "object",
+    "properties": {
+        "object": {"$ref": "#/definitions/object_array"},
+        "event": {"$ref": "#/definitions/event_array"},
+        "agent": {"$ref": "#/definitions/agent_array"},
+        "rights": {"$ref": "#/definitions/rights_array"}
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "not_empty_string": {
+            "type": "string",
+            "pattern": "^.+$"
+        },
+        "not_empty_string_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/not_empty_string"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "object": {
+            "type": "object",
+            "properties": {
+                "objectIdentifier": {"$ref": "#/definitions/objectIdentifier_array"},
+                "objectCategory": {"$ref": "#/definitions/not_empty_string"},
+                "preservationLevel": {"$ref": "#/definitions/preservationLevel_array"},
+                "significantProperties": {"$ref": "#/definitions/significantProperties_array"},
+                "objectCharacteristics": {"$ref": "#/definitions/objectCharacteristics_array"},
+                "originalName": {"$ref": "#/definitions/not_empty_string"},
+                "storage": {"$ref": "#/definitions/storage_array"},
+                "signatureInformation": {"$ref": "#/definitions/signatureInformation_array"},
+                "environmentFunction": {"$ref": "#/definitions/environmentFunction_array"},
+                "environmentDesignation": {"$ref": "#/definitions/environmentDesignation_array"},
+                "environmentRegistry": {"$ref": "#/definitions/environmentRegistry_array"},
+                "environmentExtension": {},
+                "relationship": {"$ref": "#/definitions/relationship_array"},
+                "linkingEventIdentifier": {"$ref": "#/definitions/linkingEventIdentifier_array"},
+                "linkingRightsStatementIdentifier": {"$ref": "#/definitions/linkingRightsStatementIdentifier_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "objectIdentifier",
+                "objectCategory",
+                "objectCharacteristics"
+            ]
+        },
+        "objectIdentifier": {
+            "type": "object",
+            "properties": {
+                "objectIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "objectIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "objectIdentifierType",
+                "objectIdentifierValue"
+            ]
+        },
+        "preservationLevel": {
+            "type": "object",
+            "properties": {
+                "preservationLevelType": {"$ref": "#/definitions/not_empty_string"},
+                "preservationLevelValue": {"$ref": "#/definitions/not_empty_string"},
+                "preservationLevelRole": {"$ref": "#/definitions/not_empty_string"},
+                "preservationLevelRationale": {"$ref": "#/definitions/not_empty_string_array"},
+                "preservationLevelDateAssigned": {"$ref": "#definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "preservationLevelValue"
+            ]
+        },
+        "significantProperties": {
+            "type": "object",
+            "properties": {
+                "significantPropertiesType": {"$ref": "#/definitions/not_empty_string"},
+                "significantPropertiesValue": {"$ref": "#/definitions/not_empty_string"},
+                "significantPropertiesExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "objectCharacteristics": {
+            "type": "object",
+            "properties": {
+                "compositionLevel": {"$ref": "#/definitions/not_empty_string"},
+                "fixity": {"$ref": "#/definitions/fixity_array"},
+                "size": {"$ref": "#/definitions/not_empty_string"},
+                "format": {"$ref": "#/definitions/format_array"},
+                "creatingApplication": {"$ref": "#/definitions/creatingApplication_array"},
+                "inhibitors": {"$ref": "#/inhibitors_array"},
+                "objectCharacteristicsExtension": {}
+            },
+            "additionalProperties": false,
+            "required": [
+                "format"
+            ]
+        },
+        "fixity": {
+            "type": "object",
+            "properties": {
+                "messageDigestAlgorithm": {"$ref": "#/definitions/not_empty_string"},
+                "messageDigest": {"$ref": "#/definitions/not_empty_string"},
+                "messageDigestOriginator": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "messageDigestAlgorithm",
+                "messageDigest"
+            ]
+        },
+        "format": {
+            "type": "object",
+            "properties": {
+                "formatDesignation": {"$ref": "#/definitions/formatDesignation"},
+                "formatRegistry": {"$ref": "#/definitions/formatRegistry"},
+                "formatNote": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false
+        },
+        "formatDesignation": {
+            "type": "object",
+            "properties": {
+                "formatName": {"$ref": "#/definitions/not_empty_string"},
+                "formatVersion": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "formatName"
+            ]
+        },
+        "formatRegistry": {
+            "type": "object",
+            "properties": {
+                "formatRegistryName": {"$ref": "#/definitions/not_empty_string"},
+                "formatRegistryKey": {"$ref": "#/definitions/not_empty_string"},
+                "formatRegistryRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "formatRegistryName",
+                "formatRegistryKey"
+            ]
+        },
+        "creatingApplication": {
+            "type": "object",
+            "properties": {
+                "creatingApplicationName": {"$ref": "#/definitions/not_empty_string"},
+                "creatingApplicationVersion": {"$ref": "#/definitions/not_empty_string"},
+                "dateCreatedByApplication": {"$ref": "#definitions/not_empty_string"},
+                "creatingApplicationExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "inhibitors": {
+            "type": "object",
+            "properties": {
+                "inhibitorType": {"$ref": "#/definitions/not_empty_string"},
+                "inhibitorTarget": {"$ref": "#/definitions/not_empty_string_array"},
+                "inhibitorKey": {"$ref": "#definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "inhibitorType"
+            ]
+        },
+        "storage": {
+            "type": "object",
+            "properties": {
+                "contentLocation": {"$ref": "#/definitions/contentLocation"},
+                "storageMedium": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false
+        },
+        "contentLocation": {
+            "type": "object",
+            "properties": {
+                "contentLocationType": {"$ref": "#/definitions/not_empty_string"},
+                "contentLocationValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "contentLocationType",
+                "contentLocationValue"
+            ]
+        },
+        "signatureInformation": {
+            "type": "object",
+            "properties": {
+                "signature": {"$ref": "#/definitions/signature_array"},
+                "signatureInformationExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "signature": {
+            "type": "object",
+            "properties": {
+                "signatureEncoding": {"$ref": "#/definitions/not_empty_string"},
+                "signer": {"$ref": "#/definitions/not_empty_string"},
+                "signatureMethod": {"$ref": "#/definitions/not_empty_string"},
+                "signatureValue": {"$ref": "#/definitions/not_empty_string"},
+                "signatureValidationRules": {"$ref": "#definitions/not_empty_string"},
+                "signatureProperties": {"$ref": "#/definitions/not_empty_string_array"},
+                "keyInformation": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "signatureEncoding",
+                "signatureMethod",
+                "signatureValue",
+                "signatureValidationRules"
+            ]
+        },
+        "environmentFunction": {
+            "type": "object",
+            "properties": {
+                "environmentFunctionType": {"$ref": "#/definitions/not_empty_string"},
+                "environmentFunctionLevel": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "environmentFunctionType",
+                "environmentFunctionLevel"
+            ]
+        },
+        "environmentDesignation": {
+            "type": "object",
+            "properties": {
+                "environmentName": {"$ref": "#/definitions/not_empty_string"},
+                "environmentVersion": {"$ref": "#/definitions/not_empty_string"},
+                "environmentOrigin": {"$ref": "#/definitions/not_empty_string"},
+                "environmentDesignationNote": {"$ref": "#/definitions/not_empty_string_array"},
+                "environmentDesignationExtension": {}
+            },
+            "additionalProperties": false,
+            "required": [
+                "environmentName"
+            ]
+        },
+        "environmentRegistry": {
+            "type": "object",
+            "properties": {
+                "environmentRegistryName": {"$ref": "#/definitions/not_empty_string"},
+                "environmentRegistryKey": {"$ref": "#/definitions/not_empty_string"},
+                "environmentRegistryRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "environmentRegistryName",
+                "environmentRegistryKey"
+            ]
+        },
+        "relationship": {
+            "type": "object",
+            "properties": {
+                "relationshipType": {"$ref": "#/definitions/not_empty_string"},
+                "relationshipSubType": {"$ref": "#/definitions/not_empty_string"},
+                "relatedObjectIdentifier": {"$ref": "#/definitions/relatedObjectIdentifier_array"},
+                "relatedEventIdentifier": {"$ref": "#/definitions/relatedEventIdentifier/array"},
+                "relatedEnvironmentPurpose": {"$ref": "#/definitions/not_empty_string_array"},
+                "relatedEnvironmentCharacteristic": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "relationshipType",
+                "relationshipSubType",
+                "relatedObjectIdentifier"
+            ]
+        },
+        "relatedObjectIdentifier": {
+            "type": "object",
+            "properties": {
+                "relatedObjectIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "relatedObjectIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "relatedObjectSequence": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "relatedObjectIdentifierType",
+                "relatedObjectIdentifierValue"
+            ]
+        },
+        "relatedEventIdentifier": {
+            "type": "object",
+            "properties": {
+                "relatedEventIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "relatedEventIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "relatedEventSequence": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "relatedEventIdentifierType",
+                "relatedEventIdentifierValue"
+            ]
+        },
+        "linkingEventIdentifier": {
+            "type": "object",
+            "properties": {
+                "linkingEventIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "linkingEventIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "linkingEventIdentifierType",
+                "linkingEventIdentifierValue"
+            ]
+        },
+        "linkingRightsStatementIdentifier": {
+            "type": "object",
+            "properties": {
+                "linkingRightsStatementIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "linkingRightsStatementIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "linkingRightsStatementIdentifierType",
+                "linkingRightsStatementIdentifierValue"
+            ]
+        },
+        "event": {
+            "type": "object",
+            "properties": {
+                "eventIdentifier": {"$ref": "#/definitions/eventIdentifier"},
+                "eventType": {"$ref": "#/definitions/not_empty_string"},
+                "eventDateTime": {"$ref": "#/definitions/not_empty_string"},
+                "eventDetailInformation": {"$ref": "#definitions/eventDetailInformation_array"},
+                "eventOutcomeInformation": {"$ref": "#/definitions/eventOutcomeInformation_array"},
+                "linkingAgentIdentifier": {"$ref": "#/definitions/linkingAgentIdentifier_array"},
+                "linkingObjectIdentifier": {"$ref": "#/definitions/linkingObjectIdentifier_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "eventIdentifier",
+                "eventType",
+                "eventDateTime"
+            ]
+        },
+        "eventIdentifier": {
+            "type": "object",
+            "properties": {
+                "eventIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "eventIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "eventIdentifierType",
+                "eventIdentifierValue"
+            ]
+        },
+        "eventDetailInformation": {
+            "type": "object",
+            "properties": {
+                "eventDetail": {"$ref": "#/definitions/not_empty_string"},
+                "eventDetailExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "eventOutcomeInformation": {
+            "type": "object",
+            "properties": {
+                "eventOutcome": {"$ref": "#/definitions/not_empty_string"},
+                "eventOutcomeDetail": {"$ref": "#/definitions/eventOutcomeDetail_array"}
+            },
+            "additionalProperties": false
+        },
+        "eventOutcomeDetail": {
+            "type": "object",
+            "properties": {
+                "eventOutcomeDetailNote": {"$ref": "#/definitions/not_empty_string"},
+                "eventOutcomeDetailExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "linkingAgentIdentifier": {
+            "type": "object",
+            "properties": {
+                "linkingAgentIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "linkingAgentIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "linkingAgentRole": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "linkingAgentIdentifierType",
+                "linkingAgentIdentifierValue"
+            ]
+        },
+        "linkingObjectIdentifier": {
+            "type": "object",
+            "properties": {
+                "linkingObjectIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "linkingObjectIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "linkingObjectRole": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "linkingObjectIdentifierType",
+                "linkingObjectIdentifierValue"
+            ]
+        },
+        "agent": {
+            "type": "object",
+            "properties": {
+                "agentIdentifier": {"$ref": "#/definitions/agentIdentifier_array"},
+                "agentName": {"$ref": "#/definitions/not_empty_string_array"},
+                "agentType": {"$ref": "#/definitions/not_empty_string"},
+                "agentVersion": {"$ref": "#/definitions/not_empty_string"},
+                "agentNote": {"$ref": "#/definitions/not_empty_string_array"},
+                "agentExtension": {},
+                "linkingEventIdentifier": {"$ref": "#/definitions/linkingEventIdentifier_array"},
+                "linkingEnvironmentIdentifier": {"$ref": "#/definitions/linkingEnvironmentIdentifier_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "agentIdentifier"
+            ]
+        },
+        "agentIdentifier": {
+            "type": "object",
+            "properties": {
+                "agentIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "agentIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "agentIdentifierType",
+                "agentIdentifierValue"
+            ]
+        },
+        "linkingEnvironmentIdentifier": {
+            "type": "object",
+            "properties": {
+                "linkingEnvironmentIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "linkingEnvironmentIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "linkingEnvironmentRole": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "linkingEnvironmentIdentifierType",
+                "linkingEnvironmentIdentifierValue"
+            ]
+        },
+        "rights": {
+            "type": "object",
+            "properties": {
+                "rightsStatement": {"$ref": "#/definitions/rightsStatement_array"},
+                "rightsExtension": {}
+            },
+            "additionalProperties": false
+        },
+        "rightsStatement": {
+            "type": "object",
+            "properties": {
+                "rightsStatementIdentifier": {"$ref": "#/definitions/rightsStatementIdentifier"},
+                "rightsBasis": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightInformation": {"$ref": "#/definitions/copyrightInformation"},
+                "licenseInformation": {"$ref": "#/definitions/licenseInformation"},
+                "statuteInformation": {"$ref": "#/definitions/statuteInformation_array"},
+                "otherRightsInformation": {"$ref": "#/definitions/otherRightsInformation"},
+                "rightsGranted": {"$ref": "#/definitions/rightsGranted_array"},
+                "linkingObjectIdentifier": {"$ref": "#/definitions/linkingObjectIdentifier_array"},
+                "linkingAgentIdentifier": {"$ref": "#/definitions/linkingAgentIdentifier_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "rightsStatementIdentifier",
+                "rightsBasis"
+            ]
+        },
+        "rightsStatementIdentifier": {
+            "type": "object",
+            "properties": {
+                "rightsStatementIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "rightsStatementIdentifierValue": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "rightsStatementIdentifierType",
+                "rightsStatementIdentifierValue"
+            ]
+        },
+        "copyrightInformation": {
+            "type": "object",
+            "properties": {
+                "copyrightStatus": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightJurisdiction": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightStatusDeterminationDate": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightNote": {"$ref": "#/definitions/not_empty_string_array"},
+                "copyrightDocumentationIdentifier": {"$ref": "#/definitions/copyrightDocumentationIdentifier_array"},
+                "copyrightApplicableDates": {"$ref": "#/definitions/copyrightApplicableDates"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "copyrightStatys",
+                "copyrightJurisdiction"
+            ]
+        },
+        "copyrightDocumentationIdentifier": {
+            "type": "object",
+            "properties": {
+                "copyrightDocumentationIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightDocumentationIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "copyrightDocumentationRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "copyrightDocumentationIdentifierType",
+                "copyrightDocumentationIdentifierValue"
+            ]
+        },
+        "copyrightApplicationDates": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false
+        },
+        "licenseInformation": {
+            "type": "object",
+            "properties": {
+                "licenseDocumentationIdentifier": {"$ref": "#/definitions/licenseDocumentationIdentifier_array"},
+                "licenseTerms": {"$ref": "#/definitions/not_empty_string"},
+                "licenseNote": {"$ref": "#/definitions/not_empty_string_array"},
+                "licenseApplicableDates": {"$ref": "#/definitions/licenseApplicableDates"}
+            },
+            "additionalProperties": false
+        },
+        "licenseDocumentationIdentifier": {
+            "type": "object",
+            "properties": {
+                "licenseDocumentationIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "licenseDocumentationIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "licenseDocumentationRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "licenseDocumentationIdentifierType",
+                "licenseDocumentationIdentifierValue"
+            ]
+        },
+        "licenseApplicableDates": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false
+        },
+        "statuteInformation": {
+            "type": "object",
+            "properties": {
+                "statuteJurisdiction": {"$ref": "#/definitions/not_empty_string"},
+                "statuteCitation": {"$ref": "#/definitions/not_empty_string"},
+                "statuteInformationDeterminationDate": {"$ref": "#/definitions/not_empty_string"},
+                "statuteNote": {"$ref": "#/definitions/not_empty_string_array"},
+                "statuteDocumentationIdentifier": {"$ref": "statuteDocumentationIdentifier_array"},
+                "statuteApplicableDates": {"$ref": "statuteApplicableDates"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "statuteJuisdiction",
+                "statuteCitation"
+            ]
+        },
+        "statuteDocumentationIdentifier": {
+            "type": "object",
+            "properties": {
+                "statuteDocumentationIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "statuteDocumentationIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "statuteDocumentationRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "statuteDocumentationIdentifierType",
+                "statuteDocumentationIdentifierValue"
+            ]
+        },
+        "statuteApplicableDates": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false
+        },
+        "otherRightsInformation": {
+            "type": "object",
+            "properties": {
+                "otherRightsDocumentationIdentifier": {"$ref": "#/definitions/otherRightsDocumentationIdentifier_array"},
+                "otherRightsBasis": {"$ref": "#/definitions/not_empty_string"},
+                "otherRightsApplicableDates": {"$ref": "#/definitions/otherRightsApplicableDates"},
+                "otherRightsNote": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "otherRightsBasis"
+            ]
+        },
+        "otherRightsDocumentationIdentifier": {
+            "type": "object",
+            "properties": {
+                "otherRightsDocumentationIdentifierType": {"$ref": "#/definitions/not_empty_string"},
+                "otherRightsDocumentationIdentifierValue": {"$ref": "#/definitions/not_empty_string"},
+                "otherRightsDocumentationRole": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "otherRightsDocumentationIdentifierType",
+                "otherRightsDocumentationIdentifierValue"
+            ]
+        },
+        "otherRightsApplicableDates": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false
+        },
+        "rightsGranted": {
+            "type": "object",
+            "properties": {
+                "act": {"$ref": "#/definitions/not_empty_string"},
+                "restriction": {"$ref": "#/definitions/not_empty_string_array"},
+                "termOfGrant": {"$ref": "#/definitions/termOfGrant"},
+                "termOfRestriction": {"$ref": "#/definitions/termOfRestriction"},
+                "rightsGrantedNote": {"$ref": "#/definitions/not_empty_string_array"}
+            },
+            "additionalProperties": false
+        },
+        "termOfGrant": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "startDate"
+            ]
+        },
+        "termOfRestriction": {
+            "type": "object",
+            "properties": {
+                "startDate": {"$ref": "#/definitions/not_empty_string"},
+                "endDate": {"$ref": "#/definitions/not_empty_string"}
+            },
+            "additionalProperties": false,
+            "required": [
+                "startDate"
+            ]
+        },
+        "object_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/object"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "objectIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/objectIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "preservationLevel_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/preservationLevel"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "significantProperties_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/significantProperties"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "objectCharacteristics_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/objectCharacteristics"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "fixity_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/fixity"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "format_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/format"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "creatingApplication_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/creatingApplication"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "inhibitors_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/inhibitors"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "storage_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/storage"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "signatureInformation_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/signatureInformation"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "signature_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/signature"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "environmentFunction_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/environmentFunction"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "environmentDesignation_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/environmentDesignation"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "environmentRegistry_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/environmentRegistry"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "relationship_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/relationship"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "relatedObjectIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/relatedObjectIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "relatedEventIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/relatedEventIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingEventIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingEventIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingRightsStatementIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingRightsStatementIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "event_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/event"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "eventDetailInformation_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/eventDetailInformation"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "eventOutcomeInformation_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/eventOutcomeInformation"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingAgentIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingAgentIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingObjectIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingObjectIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "agent_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/agent"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "agentIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/agentIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "linkingEnvironmentIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/linkingEnvironmentIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "rights_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/rights"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "rightsStatement_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/rightsStatement"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "copyrightDocumentationIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/copyrightDocumentationIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "licenseDocumentationIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/licenseDocumentationIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "statuteInformation_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/statuteInformation"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "statuteDocumentationIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/statuteDocumentationIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "otherRightsDocumentationIdentifier_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/otherRightsDocumentationIdentifier"},
+            "additionalItems": false,
+            "minItems": 1
+        },
+        "rightsGranted_array": {
+            "type": "array",
+            "items": {"$ref": "#/definitions/rightsGranted"},
+            "additionalItems": false,
+            "minItems": 1
+        }
+    }
+}
